@@ -1,7 +1,7 @@
 {
   "name": "express-error-handling",
   "description": "A collection of error types, handlers and middleware for use with Meanie Express Seed projects",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "homepage": "https://github.com/9me/express-error-handling",
   "author": {
     "name": "Nomi",
