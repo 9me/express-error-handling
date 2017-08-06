@@ -1,27 +1,26 @@
-# meanie-express-error-handling
+# express-error-handling
 
-[![npm version](https://img.shields.io/npm/v/meanie-express-error-handling.svg)](https://www.npmjs.com/package/meanie-express-error-handling)
+[![npm version](https://img.shields.io/npm/v/express-error-handling.svg)](https://www.npmjs.com/package/express-error-handling)
 [![node dependencies](https://david-dm.org/meanie/express-error-handling.svg)](https://david-dm.org/meanie/express-error-handling)
-[![github issues](https://img.shields.io/github/issues/meanie/express-error-handling.svg)](https://github.com/meanie/express-error-handling/issues)
+[![github issues](https://img.shields.io/github/issues/meanie/express-error-handling.svg)](https://github.com/9me/express-error-handling/issues)
 [![codacy](https://img.shields.io/codacy/4864254c6487475690821ffd20c498f0.svg)](https://www.codacy.com/app/meanie/express-error-handling)
 
 
-A collection of error types, handlers and middleware for use with [Meanie Express Seed](https://github.com/meanie/express-seed) projects
+A collection of error types, handlers and middleware for use with [Meanie Express Seed](https://github.com/9me/express-seed) projects
 
-![Meanie](https://raw.githubusercontent.com/meanie/meanie/master/meanie-logo-full.png)
 
 ## Installation
 
 You can install this package using `npm`.
 
 ```shell
-npm install meanie-express-error-handling --save
+npm install express-error-handling --save
 ```
 
 ## Configuration
 ```js
 //Load library
-const errors = require('meanie-express-error-handling');
+const errors = require('express-error-handling');
 
 //Define some custom middleware
 const myHandler = function(error, req, res, next) { ... };
@@ -82,15 +81,15 @@ someRoute(req, res, next) {
 }
 ```
 
-See the [Meanie Express Seed](https://github.com/meanie/express-seed) for usage.
+See the [Meanie Express Seed](https://github.com/9me/express-seed) for usage.
 
 ## Issues & feature requests
 
-Please report any bugs, issues, suggestions and feature requests in the [meanie-express-error-handling issue tracker](https://github.com/meanie/express-error-handling/issues).
+Please report any bugs, issues, suggestions and feature requests in the [express-error-handling issue tracker](https://github.com/9me/express-error-handling/issues).
 
 ## Contributing
 
-Pull requests are welcome! If you would like to contribute to Meanie, please check out the [Meanie contributing guidelines](https://github.com/meanie/meanie/blob/master/CONTRIBUTING.md).
+Pull requests are welcome! If you would like to contribute to Meanie, please check out the [Meanie contributing guidelines](https://github.com/9me/meanie/blob/master/CONTRIBUTING.md).
 
 ## Credits
 
