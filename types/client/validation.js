@@ -4,6 +4,16 @@
  * Dependencies
  */
 const ClientError = require('../client');
+const hop = function(arr, val) {
+  return arr.indexOf(val) > -1;
+};
+const isUnDef = function(val) {
+  return typeof val === 'undefined' || val === null;
+};
+
+const isNotNull = function(val) {
+  return isUnDef(val) === false;
+};
 
 /**
  * Constructor
@@ -78,6 +88,75 @@ ValidationError.fromMongoose = function(mongooseError) {
 
   //Create new error
   return new ValidationError(message, data);
+};
+
+/**
+ * Static helper to create from AJV
+ * @param  {Array} errors AJV errors list
+ */
+ValidationError.fromAJV = function(errors) {
+  //Get info from error and initialize data
+  const msg = 'Invalid request data';
+  const data = { fields: {} };
+  errors = Array.isArray(errors) ? errors : [errors];
+
+  //Initialize data for validation error
+  errors.forEach((err) => {
+    err.params = err.params || {};
+
+    console.log(err);
+
+    const name = err.params.missingProperty
+      || err.dataPath && err.dataPath.match(/[a-zA-Z]+/g)[0]
+      || err.params.additionalProperty
+      ;
+    if (
+      hop(['required'], err.keyword) ||
+      isNotNull(err.params.missingProperty)
+    ) {
+      const type = 'required';
+      const message = `${name} is ${type}`;
+      data.fields[name] = {type, message};
+    }
+    else if (err.keyword === 'additionalProperties') {
+      data.fields[name] = {
+        type: 'unknown',
+        message: `${name} is not a known field`,
+      };
+    }
+    else if (
+      err.params.type || err.params.allowedValues
+      || err.params.format
+      || (err.keyword &&
+        hop([
+          'rid',
+          'oneOf',
+          'anyOf',
+          'allOf',
+          'pattern',
+        ], err.keyword))
+    ) {
+      data.fields[name] = {
+        type: 'invalid',
+        message: `${name} is invalid`,
+      };
+    }
+    else if (
+      hop([
+        'maxItems',
+        'minItems',
+        'maxLength',
+        'minLength',
+      ], err.keyword)) {
+      data.fields[name] = {
+        type: 'invalid',
+        message: `${name} length is invalid`,
+      };
+    }
+  });
+
+  //Create new error
+  return new ValidationError(msg, data);
 };
 
 //Export
